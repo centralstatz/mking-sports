@@ -60,19 +60,71 @@ ui <-
       # NCAA Sports Participation
       tabPanel(
         title = "Participation",
-        icon = icon("university")
+        icon = icon("university"),
+        sidebarLayout(
+          sidebarPanel(
+            selectInput(
+              inputId = "ncaa_sports_participation_gender", 
+              label = "Gender",
+              choices = unique(ncaa_participation$Gender),
+              multiple = TRUE
+            )
+          ),
+          mainPanel(
+            dataTableOutput("ncaa_sports_participation_table") |> withSpinner(color = "#007bff")
+          )
+        )
       ),
       
       # NCAA Sports by Year
       tabPanel(
         title = "By Year",
-        icon = icon("calendar-days")
+        icon = icon("calendar-days"),
+        sidebarLayout(
+          sidebarPanel(
+            selectInput(
+              inputId = "ncaa_sports_by_year_sport",
+              label = "Sport",
+              choices = sort(unique(ncaa_sports_by_year$Sport))
+            ),
+            selectInput(
+              inputId = "ncaa_sports_by_year_gender", 
+              label = "Gender",
+              choices = unique(ncaa_sports_by_year$Gender)
+            )
+          ),
+          mainPanel(
+            dataTableOutput("ncaa_sports_by_year_table") |> withSpinner(color = "#007bff")
+          )
+        )
       ),
       
       # Power 4 Standings
       tabPanel(
         title = "Power 4 Standings",
-        icon = icon("ranking-star")
+        icon = icon("ranking-star"),
+        sidebarLayout(
+          sidebarPanel(
+            selectInput(
+              inputId = "ncaa_sports_power4_standings_sport",
+              label = "Sport",
+              choices = sort(unique(ncaa_power4_standings$Sport))
+            ),
+            selectInput(
+              inputId = "ncaa_sports_power4_standings_conference",
+              label = "Conference",
+              choices = sort(unique(ncaa_power4_standings$Conference))
+            ),
+            selectInput(
+              inputId = "ncaa_sports_power4_standings_gender", 
+              label = "Gender",
+              choices = unique(ncaa_power4_standings$Gender)
+            )
+          ),
+          mainPanel(
+            dataTableOutput("ncaa_sports_power4_standings_table") |> withSpinner(color = "#007bff")
+          )
+        )
       ),
       
       # Power 4 Budgets
@@ -89,13 +141,37 @@ ui <-
       # ODP Interregionals
       tabPanel(
         title = "ODP Interregionals",
-        icon = icon("futbol")
+        icon = icon("futbol"),
+        sidebarLayout(
+          sidebarPanel(
+            selectInput(
+              inputId = "soccer_odp_interregionals_state",
+              label = "State",
+              choices = sort(unique(odp_interregionals$State))
+            )
+          ),
+          mainPanel(
+            dataTableOutput("soccer_odp_interregionals_table") |> withSpinner(color = "#007bff")
+          )
+        )
       ),
       
       # World Cup Matches
       tabPanel(
         title = "World Cup Matches",
-        icon = icon("earth-americas")
+        icon = icon("earth-americas"),
+        sidebarLayout(
+          sidebarPanel(
+            selectInput(
+              inputId = "soccer_world_cup_year",
+              label = "Year",
+              choices = sort(unique(world_cup_matches$Year))
+            )
+          ),
+          mainPanel(
+            dataTableOutput("soccer_world_cup_table") |> withSpinner(color = "#007bff")
+          )
+        )
       )
     ),
     
