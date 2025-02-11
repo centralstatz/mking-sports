@@ -308,25 +308,25 @@ ui <-
                 selectInput(
                   inputId = "tennis_year", 
                   label = "Year:", 
-                  choices = c("All", unique(Grand_Slam_Winners$Year)), 
+                  choices = c("All", unique(grand_slam_winners$Year)), 
                   selected = "All"
                 ),
                 selectInput(
                   inputId = "tennis_tournament", 
                   label = "Tournament:", 
-                  choices = c("All", unique(Grand_Slam_Winners$Tournament)), 
+                  choices = c("All", unique(grand_slam_winners$Tournament)), 
                   selected = "All"
                 ),
                 selectInput(
                   inputId = "tennis_mens_winner", 
                   label = "Men's Winner:", 
-                  choices = c("All", unique(Grand_Slam_Winners$Mens_Winner)), 
+                  choices = c("All", unique(grand_slam_winners$Mens_Winner)), 
                   selected = "All"
                 ),
                 selectInput(
                   inputId = "tennis_womens_winner", 
                   label = "Women's Winner:", 
-                  choices = c("All", unique(Grand_Slam_Winners$Womens_Winner)), 
+                  choices = c("All", unique(grand_slam_winners$Womens_Winner)), 
                   selected = "All"
                 ),
                 actionButton(
