@@ -141,12 +141,90 @@ server <-
           
           # Sort by ranking
           arrange(Place)
-          
+        
         
       })
     
     # Make the table
     output$ncaa_sports_power4_standings_table <- renderDataTable({current_ncaa_power4_standings_data()})
+    
+    ## Power 4 Budget
+    
+    # Make dataset
+    current_ncaa_power4_budgets_data <- 
+      eventReactive(input$ncaa_sports_power4_budgets_search, {
+        
+        # Default dataset
+        data <- ncaa_power4_budgets
+        
+        # Filter selections
+        if (!is.null(input$ncaa_sports_power4_budgets_school)) {
+          data <- data[data$School %in% input$ncaa_sports_power4_budgets_school, ]
+        }
+        if (input$ncaa_sports_power4_budgets_year != "All") {
+          data <- data[data$Year == input$ncaa_sports_power4_budgets_year, ]
+        }
+        if (input$ncaa_sports_power4_budgets_conference != "All") {
+          data <- data[data$`FBS Conference` == input$ncaa_sports_power4_budgets_conference, ]
+        }
+        
+        data
+        
+      })
+    
+    # Make table
+    output$ncaa_sports_power4_budgets_table <- 
+      renderDataTable({
+        datatable(current_ncaa_power4_budgets_data(), options = list(pageLength = 10))
+      })
+    
+    # Make plot
+    output$ncaa_sports_power4_budgets_trendPlot <- 
+      renderPlotly({
+        
+        # Require inputs
+        req(current_ncaa_power4_budgets_data())
+        
+        # Use current data set
+        data <- current_ncaa_power4_budgets_data()
+        
+        # Filter out NA values for plotting
+        data <- data[!is.na(data[[input$ncaa_sports_power4_budgets_metric]]), ]
+        
+        # Check for data availability
+        if (nrow(data) == 0) {
+          output$ncaa_sports_power4_budgets_error_message <- renderText("No data available for the selected metric.")
+          return(NULL)
+        } else {
+          output$ncaa_sports_power4_budgets_error_message <- renderText("") # Clear error message
+        }
+        
+        # Plot
+        p <- 
+          data |>
+          ggplot(
+            aes(
+              x = Year, 
+              y = .data[[input$ncaa_sports_power4_budgets_metric]], 
+              color = School, 
+              group = School
+            )
+          ) +
+          geom_line(linewidth = 1) +
+          geom_point(size = 2) +
+          labs(
+            title = paste("Trend Over Time:", input$ncaa_sports_power4_budgets_metric),
+            x = "Year"
+          ) +
+          theme_minimal() +
+          scale_y_continuous(
+            name = input$ncaa_sports_power4_budgets_metric,
+            labels = scales::dollar
+          )
+        
+        ggplotly(p)
+        
+      })
     
     ### Soccer
     
@@ -196,5 +274,40 @@ server <-
     
     # Make the table
     output$soccer_world_cup_table <- renderDataTable({current_world_cup_data()})
+    
+    
+    ### Tennis
+    
+    ## Grand Slam Winners
+    
+    # Reactive data filtering
+    current_tennis_data <- 
+      eventReactive(input$tennis_search, {
+        
+        # Set default dataset
+        data <- grand_slam_winners
+        
+        # Filter based on inputs
+        if (input$tennis_year != "All") {
+          data <- data[data$Year == input$tennis_year, ]
+        }
+        if (input$tennis_tournament != "All") {
+          data <- data[data$Tournament == input$tennis_tournament, ]
+        }
+        if (input$tennis_mens_winner != "All") {
+          data <- data[data$Mens_Winner == input$tennis_mens_winner, ]
+        }
+        if (input$tennis_womens_winner != "All") {
+          data <- data[data$Womens_Winner == input$tennis_womens_winner, ]
+        }
+        
+        data
+        
+      })
+    
+    # Render the filtered table
+    output$tennis_table <- renderDataTable({
+      datatable(current_tennis_data(), options = list(pageLength = 10))
+    })
     
   }

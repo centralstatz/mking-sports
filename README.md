@@ -21,3 +21,10 @@ A [Shiny](https://shiny.posit.co/) application hosted on [Posit Connect Cloud](h
 * Added dependency to the `DT` package
 * Added all datasets currently available on GitHub (missing Power 4 Budgets and Grand Slam Champions)
   + For now, just added a simple data table to see the (lightly processed) raw data
+  
+## 2/11/2025
+
+* Added dependency to the `plotly` package
+* Added data for NCAA power 4 budgets, and grand slam champions
+* Added tabs on all sidebars with an "About" page to list sources and add notes for a particular page
+* Added link for Grand Slam dataset

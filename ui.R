@@ -27,23 +27,33 @@ ui <-
         icon = icon("school"),
         sidebarLayout(
           sidebarPanel(
-            selectInput(
-              inputId = "hs_sports_participation_gender", 
-              label = "Gender",
-              choices = unique(hs_sports_participation$Gender),
-              multiple = TRUE
-            ),
-            selectInput(
-              inputId = "hs_sports_participation_sport", 
-              label = "Sport",
-              choices = unique(hs_sports_participation$Sport),
-              multiple = TRUE
-            ),
-            selectInput(
-              inputId = "hs_sports_participation_measure", 
-              label = "Measure",
-              choices = unique(hs_sports_participation$Measure),
-              multiple = TRUE
+            tabsetPanel(
+              tabPanel(
+                title = "Filters",
+                selectInput(
+                  inputId = "hs_sports_participation_gender", 
+                  label = "Gender",
+                  choices = unique(hs_sports_participation$Gender),
+                  multiple = TRUE
+                ),
+                selectInput(
+                  inputId = "hs_sports_participation_sport", 
+                  label = "Sport",
+                  choices = unique(hs_sports_participation$Sport),
+                  multiple = TRUE
+                ),
+                selectInput(
+                  inputId = "hs_sports_participation_measure", 
+                  label = "Measure",
+                  choices = unique(hs_sports_participation$Measure),
+                  multiple = TRUE
+                )
+              ),
+              tabPanel(
+                title = "About",
+                h3("Source"),
+                h3("Description")
+              )
             )
           ),
           mainPanel(
@@ -52,7 +62,7 @@ ui <-
         )
       )
     ),
-      
+    
     # Tab 2: NCAA Sports
     navbarMenu(
       title = "NCAA Sports",
@@ -63,11 +73,21 @@ ui <-
         icon = icon("university"),
         sidebarLayout(
           sidebarPanel(
-            selectInput(
-              inputId = "ncaa_sports_participation_gender", 
-              label = "Gender",
-              choices = unique(ncaa_participation$Gender),
-              multiple = TRUE
+            tabsetPanel(
+              tabPanel(
+                title = "Filters",
+                selectInput(
+                  inputId = "ncaa_sports_participation_gender", 
+                  label = "Gender",
+                  choices = unique(ncaa_participation$Gender),
+                  multiple = TRUE
+                )
+              ),
+              tabPanel(
+                title = "About",
+                h3("Source"),
+                h3("Description")
+              )
             )
           ),
           mainPanel(
@@ -82,15 +102,25 @@ ui <-
         icon = icon("calendar-days"),
         sidebarLayout(
           sidebarPanel(
-            selectInput(
-              inputId = "ncaa_sports_by_year_sport",
-              label = "Sport",
-              choices = sort(unique(ncaa_sports_by_year$Sport))
-            ),
-            selectInput(
-              inputId = "ncaa_sports_by_year_gender", 
-              label = "Gender",
-              choices = unique(ncaa_sports_by_year$Gender)
+            tabsetPanel(
+              tabPanel(
+                title = "Filters",
+                selectInput(
+                  inputId = "ncaa_sports_by_year_sport",
+                  label = "Sport",
+                  choices = sort(unique(ncaa_sports_by_year$Sport))
+                ),
+                selectInput(
+                  inputId = "ncaa_sports_by_year_gender", 
+                  label = "Gender",
+                  choices = unique(ncaa_sports_by_year$Gender)
+                )
+              ),
+              tabPanel(
+                title = "About",
+                h3("Source"),
+                h3("Description")
+              )
             )
           ),
           mainPanel(
@@ -105,20 +135,30 @@ ui <-
         icon = icon("ranking-star"),
         sidebarLayout(
           sidebarPanel(
-            selectInput(
-              inputId = "ncaa_sports_power4_standings_sport",
-              label = "Sport",
-              choices = sort(unique(ncaa_power4_standings$Sport))
-            ),
-            selectInput(
-              inputId = "ncaa_sports_power4_standings_conference",
-              label = "Conference",
-              choices = sort(unique(ncaa_power4_standings$Conference))
-            ),
-            selectInput(
-              inputId = "ncaa_sports_power4_standings_gender", 
-              label = "Gender",
-              choices = unique(ncaa_power4_standings$Gender)
+            tabsetPanel(
+              tabPanel(
+                title = "Filters",
+                selectInput(
+                  inputId = "ncaa_sports_power4_standings_sport",
+                  label = "Sport",
+                  choices = sort(unique(ncaa_power4_standings$Sport))
+                ),
+                selectInput(
+                  inputId = "ncaa_sports_power4_standings_conference",
+                  label = "Conference",
+                  choices = sort(unique(ncaa_power4_standings$Conference))
+                ),
+                selectInput(
+                  inputId = "ncaa_sports_power4_standings_gender", 
+                  label = "Gender",
+                  choices = unique(ncaa_power4_standings$Gender)
+                )
+              ),
+              tabPanel(
+                title = "About",
+                h3("Source"),
+                h3("Description")
+              )
             )
           ),
           mainPanel(
@@ -130,7 +170,64 @@ ui <-
       # Power 4 Budgets
       tabPanel(
         title = "Power 4 Budgets",
-        icon = icon("dollar-sign")
+        icon = icon("dollar-sign"),
+        sidebarLayout(
+          sidebarPanel(
+            tabsetPanel(
+              tabPanel(
+                title = "Filters",
+                selectInput(
+                  inputId = "ncaa_sports_power4_budgets_school", 
+                  label = "School:",
+                  choices = unique(ncaa_power4_budgets$School),
+                  selected = NULL,
+                  multiple = TRUE
+                ),
+                selectInput(
+                  inputId = "ncaa_sports_power4_budgets_year", 
+                  label = "Year:",
+                  choices = c("All", unique(ncaa_power4_budgets$Year)),
+                  selected = "All"
+                ),
+                selectInput(
+                  inputId = "ncaa_sports_power4_budgets_conference", 
+                  label = "FBS Conference:",
+                  choices = c("All", unique(ncaa_power4_budgets$`FBS Conference`)),
+                  selected = "All"
+                ),
+                selectInput(
+                  inputId = "ncaa_sports_power4_budgets_metric", 
+                  label = "Select Metric for Graph:",
+                  choices = c("Total Expenses", "Total Revenues", "Total Football Spending"),
+                  selected = "Total Expenses"
+                ),
+                actionButton(
+                  inputId = "ncaa_sports_power4_budgets_search", 
+                  label = "Search", 
+                  class = "btn-primary"
+                )
+              ),
+              tabPanel(
+                title = "About",
+                h3("Source"),
+                h3("Description")
+              )
+            )
+          ),
+          mainPanel(
+            tabsetPanel(
+              tabPanel(
+                title = "Data Table", 
+                dataTableOutput("ncaa_sports_power4_budgets_table") |> withSpinner(color = "#007bff")
+              ),
+              tabPanel(
+                title = "Trend Over Time",
+                plotlyOutput("ncaa_sports_power4_budgets_trendPlot") |> withSpinner(color = "#007bff"),
+                textOutput("ncaa_sports_power4_budgets_error_message") # Display error messages
+              )
+            )
+          )
+        )
       )
     ),
     
@@ -144,10 +241,20 @@ ui <-
         icon = icon("futbol"),
         sidebarLayout(
           sidebarPanel(
-            selectInput(
-              inputId = "soccer_odp_interregionals_state",
-              label = "State",
-              choices = sort(unique(odp_interregionals$State))
+            tabsetPanel(
+              tabPanel(
+                title = "Filters",
+                selectInput(
+                  inputId = "soccer_odp_interregionals_state",
+                  label = "State",
+                  choices = sort(unique(odp_interregionals$State))
+                )
+              ),
+              tabPanel(
+                title = "About",
+                h3("Source"),
+                h3("Description")
+              )
             )
           ),
           mainPanel(
@@ -162,10 +269,20 @@ ui <-
         icon = icon("earth-americas"),
         sidebarLayout(
           sidebarPanel(
-            selectInput(
-              inputId = "soccer_world_cup_year",
-              label = "Year",
-              choices = sort(unique(world_cup_matches$Year))
+            tabsetPanel(
+              tabPanel(
+                title = "Filters",
+                selectInput(
+                  inputId = "soccer_world_cup_year",
+                  label = "Year",
+                  choices = sort(unique(world_cup_matches$Year))
+                )
+              ),
+              tabPanel(
+                title = "About",
+                h3("Source"),
+                h3("Description")
+              )
             )
           ),
           mainPanel(
@@ -182,7 +299,53 @@ ui <-
       # Grand Slam Champions
       tabPanel(
         title = "Grand Slam Champions",
-        icon = icon("table-tennis-paddle-ball")
+        icon = icon("table-tennis-paddle-ball"),
+        sidebarLayout(
+          sidebarPanel(
+            tabsetPanel(
+              tabPanel(
+                title = "Filters",
+                selectInput(
+                  inputId = "tennis_year", 
+                  label = "Year:", 
+                  choices = c("All", unique(Grand_Slam_Winners$Year)), 
+                  selected = "All"
+                ),
+                selectInput(
+                  inputId = "tennis_tournament", 
+                  label = "Tournament:", 
+                  choices = c("All", unique(Grand_Slam_Winners$Tournament)), 
+                  selected = "All"
+                ),
+                selectInput(
+                  inputId = "tennis_mens_winner", 
+                  label = "Men's Winner:", 
+                  choices = c("All", unique(Grand_Slam_Winners$Mens_Winner)), 
+                  selected = "All"
+                ),
+                selectInput(
+                  inputId = "tennis_womens_winner", 
+                  label = "Women's Winner:", 
+                  choices = c("All", unique(Grand_Slam_Winners$Womens_Winner)), 
+                  selected = "All"
+                ),
+                actionButton(
+                  inputId = "tennis_search",
+                  label = "Search"
+                )
+              ),
+              tabPanel(
+                title = "About",
+                h3("Source"),
+                a("https://www.espn.com/tennis/history", href = "https://www.espn.com/tennis/history"),
+                h3("Description")
+              )
+            )
+          ),
+          mainPanel(
+            dataTableOutput("tennis_table") |> withSpinner(color = "#007bff")
+          )
+        )
       )
     ),
     

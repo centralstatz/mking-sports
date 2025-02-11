@@ -9,6 +9,7 @@ library(tidyverse)
 library(tigris)
 library(leaflet)
 library(DT)
+library(plotly)
 
 ## Load data files
 
@@ -145,6 +146,27 @@ ncaa_power4_standings <-
   # Remove non-ranked categories
   filter(!is.na(Place))
 
+# NCAA Power 4 Budgets
+ncaa_power4_budgets <-
+  read_csv(
+    file = paste0(base_path, "Power4Budgets.csv")
+  ) |>
+  
+  # Parse as numeric
+  mutate(
+    across(
+      c(
+        `Total Revenues`,
+        `Total Football Spending`,
+        `Athletics Related Debt`
+      ),
+      \(x) str_remove_all(x, pattern = "[$]|[,]") |> as.numeric()
+    )
+  ) |>
+  
+  # Rename the column
+  rename(School = Data)
+
 # ODP Interregionals
 odp_interregionals <-
   read_csv(
@@ -162,6 +184,12 @@ odp_interregionals <-
 world_cup_matches <-
   read_csv(
     file = paste0(base_path, "WorldCup_Matches.csv")
+  )
+
+# Grand Slam Champions
+grand_slam_winners <- 
+  read_csv(
+    file = paste0(base_path, "Grand_Slam_Winners.csv")
   )
 
 ## Metadata
