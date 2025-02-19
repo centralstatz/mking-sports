@@ -3934,13 +3934,13 @@
       "checksum": "d31aa3cb9b5d8841a6ed5c1d34769afd"
     },
     "README.md": {
-      "checksum": "9158fc6c975c26d043b458446e720161"
+      "checksum": "47cebc9df3f8f7ac52e96b5ec2b2f4e2"
     },
     "server.R": {
       "checksum": "0f6f30b471f6c43f2f3b6fcd76faca1e"
     },
     "ui.R": {
-      "checksum": "ba138c5b4e0d45518d3bede0bb951097"
+      "checksum": "16e8c9dd022440f5a97e21249be763a0"
     }
   },
   "users": null

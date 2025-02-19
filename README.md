@@ -28,3 +28,7 @@ A [Shiny](https://shiny.posit.co/) application hosted on [Posit Connect Cloud](h
 * Added data for NCAA power 4 budgets, and grand slam champions
 * Added tabs on all sidebars with an "About" page to list sources and add notes for a particular page
 * Added link for Grand Slam dataset
+
+## 2/19/2025
+
+* Added source link to each page

@@ -52,6 +52,7 @@ ui <-
               tabPanel(
                 title = "About",
                 h3("Source"),
+                a("NFHS.org", href = "https://nfhs.org/"),
                 h3("Description")
               )
             )
@@ -86,6 +87,7 @@ ui <-
               tabPanel(
                 title = "About",
                 h3("Source"),
+                a("NCAA", href = "https://www.ncaa.org/sports/2015/3/2/estimated-probability-of-competing-in-college-athletics.aspx"),
                 h3("Description")
               )
             )
@@ -119,6 +121,7 @@ ui <-
               tabPanel(
                 title = "About",
                 h3("Source"),
+                a("NCAA Sports Sponsorship and Participation Report", href = "https://ncaaorg.s3.amazonaws.com/research/sportpart/2024RES_SportsSponsorshipParticipationRatesReport.pdf"),
                 h3("Description")
               )
             )
@@ -157,6 +160,7 @@ ui <-
               tabPanel(
                 title = "About",
                 h3("Source"),
+                "Author Calculations",
                 h3("Description")
               )
             )
@@ -210,6 +214,7 @@ ui <-
               tabPanel(
                 title = "About",
                 h3("Source"),
+                a("Knight-Newhouse", href = "https://knightnewhousedata.org/fbs"),
                 h3("Description")
               )
             )
@@ -253,6 +258,7 @@ ui <-
               tabPanel(
                 title = "About",
                 h3("Source"),
+                a("US Youth Soccer", href = "https://www.usyouthsoccer.org/olympic-development-program/"),
                 h3("Description")
               )
             )
@@ -281,6 +287,8 @@ ui <-
               tabPanel(
                 title = "About",
                 h3("Source"),
+                "FIFA World Cup Archive, accessed via",
+                a("Kaggle", href = "https://www.kaggle.com/datasets/abecklas/fifa-world-cup"),
                 h3("Description")
               )
             )
@@ -337,7 +345,7 @@ ui <-
               tabPanel(
                 title = "About",
                 h3("Source"),
-                a("https://www.espn.com/tennis/history", href = "https://www.espn.com/tennis/history"),
+                a("ESPN", href = "https://www.espn.com/tennis/history"),
                 h3("Description")
               )
             )
